@@ -9,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -33,21 +32,12 @@ public class FreightModel {
     @JoinColumn(name = "sender_id")
     private UserModel sender;
 
-    @OneToOne(mappedBy = "freight")
-    private QueryModel query;
+    @Column(name="consultation_date")
+    private Calendar consultationDate;
 
     public Long getId() {
         return id;
     }
-
-    public QueryModel getQuery() {
-        return query;
-    }
-
-    public void setQuery(QueryModel query) {
-        this.query = query;
-    }
-
     public void setId(Long id) {
         this.id = id;
     }
