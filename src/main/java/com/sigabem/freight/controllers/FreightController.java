@@ -1,9 +1,7 @@
 package com.sigabem.freight.controllers;
-import com.sigabem.freight.controllers.dto.AddressResponse;
 import com.sigabem.freight.controllers.dto.FreightRequest;
 import com.sigabem.freight.controllers.dto.FreightResponse;
 import com.sigabem.freight.models.FreightModel;
-import com.sigabem.freight.repositories.CepRepository;
 import com.sigabem.freight.services.FreightService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/calculate-freight")
 public class FreightController {
-    
-    CepRepository findCepRepository = new CepRepository();
-    
+  
     @Autowired
     FreightService service;
 
@@ -28,12 +24,9 @@ public class FreightController {
         try {
             if(!freight.isValid()){
                 throw new Exception();
-            }
-            final AddressResponse addresssRecipient = findCepRepository.findCep(freight.getCepRecipient());
-            final AddressResponse addressSender = findCepRepository.findCep(freight.getCepSender());
-            
+            }            
             FreightModel freightModel = freight.converter();
-            service.calculateFreight(addresssRecipient, addressSender, freightModel);
+            service.calculateFreight(freightModel);
             
             return new ResponseEntity<FreightResponse>(FreightResponse.fromFreightModel(freightModel), HttpStatus.OK);
         } catch (Exception e) {

@@ -5,6 +5,7 @@ import java.util.Date;
 
 import com.sigabem.freight.controllers.dto.AddressResponse;
 import com.sigabem.freight.models.FreightModel;
+import com.sigabem.freight.repositories.CepRepository;
 import com.sigabem.freight.repositories.FreightRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +17,13 @@ public class FreightService {
     @Autowired
     FreightRepository freightRepository;
 
-    public void calculateFreight(AddressResponse addresssRecipient, AddressResponse addressSender, FreightModel freight) {
-        System.out.println("AQUI 2");
+    CepRepository findCepRepository = new CepRepository();
+
+    public void calculateFreight(FreightModel freight) {
+        AddressResponse addresssRecipient = findAddressByCep(freight.getRecipientCep());
+        AddressResponse addressSender = findAddressByCep(freight.getSenderCep());
+        
         freight.setTotalValue(freight.getWeight());
-        System.out.println("AQUI 5");
         if(addressSender.getDdd().equals(addresssRecipient.getDdd())){
             freight.setTotalValue(calculateDiscount(freight, 50));
             freight.setConsultationDate(Calendar.getInstance().getTime());
@@ -33,7 +37,6 @@ public class FreightService {
             freight.setExpectedDate(addDaysFreight(10, freight));
         }
         try {
-            System.out.println("AQUI 4");
             freightRepository.save(freight);
         } catch (Exception e) {
             throw e;
@@ -52,5 +55,13 @@ public class FreightService {
 
     private Double calculateDiscount(FreightModel freight, double percent){
         return freight.getTotalValue() - (freight.getTotalValue() * percent / 100.00);
+    }
+
+    private AddressResponse findAddressByCep(String cep){
+        try {
+            return findCepRepository.findCep(cep);
+        } catch (Exception e) {
+            throw e;
+        }
     }
 }
