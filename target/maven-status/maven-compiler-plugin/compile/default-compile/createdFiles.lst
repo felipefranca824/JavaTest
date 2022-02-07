@@ -1,0 +1,10 @@
+com\sigabem\freight\SpringFoxConfiguration.class
+com\sigabem\freight\repositories\FreightRepository.class
+com\sigabem\freight\repositories\CepRepository.class
+com\sigabem\freight\controllers\dto\AddressResponse.class
+com\sigabem\freight\controllers\dto\FreightResponse.class
+com\sigabem\freight\controllers\dto\FreightRequest.class
+com\sigabem\freight\controllers\FreightController.class
+com\sigabem\freight\services\FreightService.class
+com\sigabem\freight\models\FreightModel.class
+com\sigabem\freight\FreightApplication.class
