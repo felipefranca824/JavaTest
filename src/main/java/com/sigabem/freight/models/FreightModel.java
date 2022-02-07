@@ -1,14 +1,11 @@
 package com.sigabem.freight.models;
-
-import java.util.Calendar;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -25,15 +22,19 @@ public class FreightModel {
     private Double weight;
 
     @Column(name = "expected_date")
-    private Calendar expectedDate;
-
+    private Date expectedDate;
     
-    @ManyToOne
-    @JoinColumn(name = "sender_id")
-    private UserModel sender;
-
     @Column(name="consultation_date")
-    private Calendar consultationDate;
+    private Date consultationDate;
+
+    @Column(name="recipient_cep")
+    private String recipientCep;
+
+    @Column(name="sender_cep")
+    private String senderCep;
+
+    @Column(name="recipient_name")
+    private String recipientName;
 
     public Long getId() {
         return id;
@@ -58,22 +59,38 @@ public class FreightModel {
         this.weight = weight;
     }
 
-    public Calendar getExpectedDate() {
+    public Date getExpectedDate() {
         return expectedDate;
     }
 
-    public void setExpectedDate(Calendar expectedDate) {
+    public void setExpectedDate(Date expectedDate) {
         this.expectedDate = expectedDate;
     }
 
-    public UserModel getSenderID() {
-        return sender;
+    public Date getConsultationDate() {
+        return consultationDate;
     }
-
-    public void setSenderID(UserModel senderID) {
-        this.sender = senderID;
+    public void setConsultationDate(Date consultationDate) {
+        this.consultationDate = consultationDate;
     }
-
-    
+    public String getRecipientCep() {
+        return recipientCep;
+    }
+    public void setRecipientCep(String recipientCep) {
+        this.recipientCep = recipientCep;
+    }
+    public String getSenderCep() {
+        return senderCep;
+    }
+    public void setSenderCep(String senderCep) {
+        this.senderCep = senderCep;
+    }
+    public String getRecipientName() {
+        return recipientName;
+    }
+    public void setRecipientName(String recipientName) {
+        this.recipientName = recipientName;
+    }
+  
 
 }
