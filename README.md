@@ -2,6 +2,12 @@
 
 ## Faça um fork desse projeto e siga as instruções a seguir utilizando esse projeto.
 
+# To run
+1. Fazer um clone do projeto
+2. Ter instalado o Docker Engine [Docker](https://www.docker.com/get-started)
+3. Executar o comando: docker-compose up --build --force-recreate
+3. Após a inicialização do serviço visitar no navegador http://localhost:8080/swagger-ui.html para ter acesso a documentação do projeto.
+
 # Pré-requisitos
 
 Implementar apenas a API (Backend)
